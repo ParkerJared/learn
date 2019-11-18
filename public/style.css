@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+/*
+[ ORDERING ]:
+- visual style (color, display),
+- sizing (width, padding),
+- positioning,
+- extra
+*/ 
+
+/* [ Scroll bar ] */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: none;
+}
+::-webkit-scrollbar-thumb {
+    background: lightgrey; 
+
+    width: 5px;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: grey; 
+
+    border-radius: 5px;
+}
+
+/* [ DEFAULTS ] */
+
+*{
+    font-family: montserrat;
+}
+
+a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+li{
+    list-style: none;
+    text-decoration: none;
+}
+
+body, html{
+    height: 100%;
+    width: 100%;
+
+    padding: 0;
+    margin: 0;
+}
+
+/* [ BASICS ] */
+
+.box{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    border-radius: 1em;
+    padding: 1em;
+
+    position: relative;
+    top: 0;
+
+    transition: top 0.3s;
+}
+.box:hover{
+    top: -5px;
+}
+
+.wrapper{
+    padding: 1.5em;
+}
+.wrapper > :first-child{
+    margin-top: 0;
+}
+
+img{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    width: 100%;
+}
+
+/* [ MAIN CONTENT ]*/
+
+.main{
+    margin-left: 280px;
+
+    z-index: -1;
+}
+
+/* [ SIDEBAR ] */
+
+.sidebar .wrapper{
+    padding-top: 0;
+}
+
+.sidebar{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 100%;
+    width: 280px;
+
+    overflow: auto;
+
+    position: fixed;
+    top: 0;
+
+    z-index: 1;
+}
+
+.sidebar h1{
+    border-bottom: 1px solid lightgrey;
+    background-color: white;
+
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin: 0;
+
+    text-align: center;
+
+    position: sticky;
+    top: 0;
+}
+
+/* - NAVIGATION - */
+
+/* Navigation items */
+.item a{
+    border-bottom: 1px solid lightgrey;
+
+    padding: 0.75em;
+
+    display: block;
+}
+.item a:hover{
+    font-weight: bold;
+
+    cursor: pointer;
+}
+.item a.active{
+    font-weight: bold;
+}
+
+/* Hide dropdowns */
+.dropdown .nav{
+    display: none;
+}
+
+/* Dropdown indents */
+.nav .dropdown .item{
+    text-indent: 1em;
+}
+.nav .dropdown .dropdown .item{
+    text-indent: 2em;
+}
+.nav .dropdown .dropdown .dropdown .item{
+    text-indent: 3em;
+}
+
+/* Style dropdown items */
+.item .nav a{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.dropdown a:only-child{
+    background-color: rgb(240, 240, 240);
+}
+
+/* Dropdown icon */
+.dropdown a:not(:only-child)::before {
+    content: "\f150";
+    font-family: "Font Awesome 5 Free";
+    font-weight:900;
+
+    padding-right: 0.25em;
+}
