@@ -9,6 +9,8 @@ $(document).ready( function(){
         $(this).parent().children('.nav').slideToggle();
     });
 
+    // Page transitions
+
     function transitionPage( href ){
 
         $('.nav a').removeClass( 'active' );

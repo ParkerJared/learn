@@ -28,6 +28,11 @@
     border-radius: 5px;
 }
 
+/* [ COLOURS ] */
+
+.item a.active  { color: var(--color); }
+.main .wrapper a{ color: var(--color); }
+
 /* [ DEFAULTS ] */
 
 *{
@@ -37,6 +42,10 @@
 a{
     color: inherit;
     text-decoration: inherit;
+}
+
+a:hover{
+    font-weight: bold;
 }
 
 li{

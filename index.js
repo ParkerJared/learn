@@ -40,7 +40,7 @@ app.get( '/:subject/*', (req, res) => {
             content = fs.readFileSync( `${dir}.html`, 'utf8' );
 
         } else {
-            return res.redirect( `/${subject}/` );
+            content = `<h1>Oh no!</h1>\n<p>This page doesn't exist. <a href=\"/${req.params.subject}\">Go back</a>`
         }
 
         if( req.params[0] ){ let pages = req.params[0].split('/'); page = `- ${pages[pages.length-1].toUpperCase()}`; }
