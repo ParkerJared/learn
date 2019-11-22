@@ -6,7 +6,7 @@ $(document).ready( function(){
     $(`a[href="${location.pathname}"]`).parents('.dropdown').children('.nav').slideToggle(0);
     
     $('.dropdown a:not(:only-child)').click( function(){
-        $(this).parent().children('.nav').slideToggle();
+        $(this).parent().children('.nav').stop().slideToggle();
     });
 
     // Page transitions
