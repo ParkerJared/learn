@@ -11,24 +11,24 @@ $(document).ready( function(){
 
     // Page transitions
 
-    function transitionPage( href ){
+    // function transitionPage( href ){
 
-        $('.nav a').removeClass( 'active' );
-        $(`a[href="${href}"]`).addClass('active');
+    //     $('.nav a').removeClass( 'active' );
+    //     $(`a[href="${href}"]`).addClass('active');
 
-        $.ajax({
-            url: href,
-            success: function( data ){
-                $('.main').fadeOut( 300, () => {
-                    let content = $(data).filter('.main').html();
+    //     $.ajax({
+    //         url: href,
+    //         success: function( data ){
+    //             $('.main').fadeOut( 300, () => {
+    //                 let content = $(data).filter('.main').html();
                     
-                    $('.main').html(content);
+    //                 $('.main').html(content);
 
-                    $('.main').fadeIn( 300 );
-                });
-            }
-        });
-    }
+    //                 $('.main').fadeIn( 300 );
+    //             });
+    //         }
+    //     });
+    // }
 
     $(window).on('popstate', function(){
        transitionPage( location.href );
