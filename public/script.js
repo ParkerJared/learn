@@ -39,12 +39,12 @@ $(document).ready( function(){
 
         //if( location.href.split('/').includes(href.split('/')[1]) ){};
 
-        e.preventDefault();
+        // e.preventDefault();
 
-        if( href ){
-            window.history.pushState(null, null, href);
+        // if( href ){
+        //     window.history.pushState(null, null, href);
 
-            transitionPage( href );
-        };
+        //     transitionPage( href );
+        // };
     });
 });
