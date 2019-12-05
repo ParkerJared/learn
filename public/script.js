@@ -1,50 +1,56 @@
 $(document).ready( function(){
-    // Show active page
-    $(`a[href="${location.pathname}"]`).addClass('active');
 
-    // Dropdown to active page
-    $(`a[href="${location.pathname}"]`).parents('.dropdown').children('.nav').slideToggle(0);
-    
+    let active = $(`a[href="${location.pathname}"]`);
+    if( active[0] ){
+      // Show active page
+      active.addClass('active');
+
+      // Dropdown to active page
+      active.parents('.dropdown').children('.nav').slideToggle(0);
+      // Scroll to active page
+      $('.sidebar').scrollTop( active.offset().top );
+    };
+
     $('.dropdown a:not(:only-child)').click( function(){
-        $(this).parent().children('.nav').stop().slideToggle();
+      $(this).parent().children('.nav').stop().slideToggle();
     });
 
     // Page transitions
 
-    // function transitionPage( href ){
+    function transitionPage( href ){
 
-    //     $('.nav a').removeClass( 'active' );
-    //     $(`a[href="${href}"]`).addClass('active');
+        $('.nav a').removeClass( 'active' );
+        $(`a[href="${href}"]`).addClass('active');
 
-    //     $.ajax({
-    //         url: href,
-    //         success: function( data ){
-    //             $('.main').fadeOut( 300, () => {
-    //                 let content = $(data).filter('.main').html();
+        $.ajax({
+            url: href,
+            success: function( data ){
+                $('.main').fadeOut( 300, () => {
+                    let content = $(data).filter('.main').html();
                     
-    //                 $('.main').html(content);
+                    $('.main').html(content);
 
-    //                 $('.main').fadeIn( 300 );
-    //             });
-    //         }
-    //     });
-    // }
+                    $('.main').fadeIn( 300 );
+                });
+            }
+        });
+    };
 
-    $(window).on('popstate', function(){
-       transitionPage( location.href );
-    });
+    // $(window).on('popstate', function(){
+    //    transitionPage( location.href );
+    // });
 
-    $('a').click( function(e){
-        let href = $(this).attr('href');
+    // $('a').click( function(e){
+    //     let href = $(this).attr('href');
 
-        //if( location.href.split('/').includes(href.split('/')[1]) ){};
+    //     if( location.href.split('/').includes(href.split('/')[1]) ){};
 
-        // e.preventDefault();
+    //     e.preventDefault();
 
-        // if( href ){
-        //     window.history.pushState(null, null, href);
+    //     if( href ){
+    //         window.history.pushState(null, null, href);
 
-        //     transitionPage( href );
-        // };
-    });
+    //         transitionPage( href );
+    //     };
+    // });
 });
