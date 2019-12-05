@@ -3,59 +3,65 @@
 console.log("STARTING SERVER...")
 
 // Import libaries
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const path     = require('path');
+const fs       = require('fs');
+const express  = require('express');
+const showdown = require('showdown');
 
 const subjects = fs.readdirSync( __dirname + '/content/');
+
+const converter = new showdown.Converter({ noHeaderId: true });
 
 const app = express();
 const server = app.listen(8080, () => console.log("LISTENING FOR REQUESTS")); // Listens on port 3000
 app.use('/static', express.static('public')); // Files the client will see from ./static
-
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
 // - [ ROUTING ] -
 
 app.get('/', (req, res) => {
-    res.sendFile( __dirname + '/views/@.html');
+  res.sendFile( __dirname + '/views/@.html');
 });
 
 app.get( '/:subject/*', (req, res) => {
 
-    if( subjects.indexOf( req.params.subject ) != -1 ){
-        let page, content;
+  if( subjects.indexOf( req.params.subject ) != -1 ){
+    let markdown;
 
-        let subject = req.params.subject;
-        let dir = path.join( __dirname, 'content', subject, ...req.params[0].split('/') );
+    let subject = req.params.subject;
+    let dir = path.join( __dirname, 'content', subject, ...req.params[0].split('/') );
 
-        if( fs.existsSync(`${dir}/.html`) ){
-            content = fs.readFileSync( `${dir}/.html`, 'utf8' );
+    // Content for folder
+    if( fs.existsSync(`${dir}/.md`) ){
+      markdown = fs.readFileSync( `${dir}/.md`, 'utf8' );
 
-        } else if( req.params[0] == '' ){
-            content = '<h1>Welcome!</h1>\n<p>Please select the topic you want to explore or revise in the side menu. 😊</p>';
+    // Home page placeholder
+    } else if( req.params[0] == '' ){
+      markdown = '#Welcome!\nPlease select the topic you want to explore or revise in the side menu. 😊';
 
-        }else if( fs.existsSync(`${dir}.html`) ){
-            content = fs.readFileSync( `${dir}.html`, 'utf8' );
+    // Content found
+    }else if( fs.existsSync(`${dir}.md`) ){
+      markdown = fs.readFileSync( `${dir}.md`, 'utf8' );
 
-        } else {
-            content = `<h1>Oh no!</h1>\n<p>This page doesn't exist. <a href=\"/${req.params.subject}\">Go back</a>`
-        }
+    // Content not found
+    } else {
+      markdown = `#Oh no!\nThis page doesn't exist or couldn't be found. You can find the home page [here](/${req.params.subject}).\n\n![](/static/resources/404.gif)`;
+    }
 
-        if( req.params[0] ){ let pages = req.params[0].split('/'); page = `- ${pages[pages.length-1].toUpperCase()}`; }
-        
-        res.render( subject, { page, content } );
+    let content = converter.makeHtml(markdown);
+    
+    res.render( subject, { content } );
 
-    } else { return res.redirect('/'); }
+  } else { return res.redirect('/'); }
 
 });
 
 app.get('/*', (req, res) => {
-    let request = req.params[0].toLowerCase();
-    if( subjects.indexOf( request ) != -1 ){
-        res.redirect(`./${request}/`);
-    } else {
-        res.redirect(`./`);
-    }
+  let request = req.params[0].toLowerCase();
+  if( subjects.indexOf( request ) != -1 ){
+    res.redirect(`./${request}/`);
+  } else {
+    res.redirect(`./`);
+  }
 });

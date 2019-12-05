@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTEC IT <%= page %></title>
+    <title>BTEC IT</title>
     <link rel="icon" href="/static/favicon.ico">
 
     <link href="/static/style.css" rel="stylesheet" type="text/css" />
@@ -13,11 +13,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/static/script.js"></script>
 
-    <style> :root{ --color: #5f27cd; } </style>
+    <style> :root{ --colour: #5f27cd; } </style>
     
   </head>
   <body>
-    <div class="sidebar">
+
+    <a class="drawer"><i class="fas fa-compass"></i></a>
+
+    <div class="sidebar hide">
       <div class="wrapper">
 
         <a href="/it"><h1><i class="fas fa-database"></i> BTEC IT</h1></a>
@@ -247,7 +250,7 @@
                 <a>Moral and ethical issues</a>
                 <div class="nav">
                   <div class="item">
-                    <a href="/it/f/1/thing">Page 1</a>
+                    <a href="/it/f/1/factors">Factors</a>
                   </div>
                   <div class="item">
                     <a href="/it/f/1/that">Page 2</a>
@@ -276,9 +279,9 @@
     </div>
 
     <div class="main">
-        <div class="wrapper">
-            <%- content %>
-        </div>
+      <div class="wrapper">
+          <%- content %>
+      </div>
     </div>
   </body>
 </html>

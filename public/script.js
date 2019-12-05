@@ -1,5 +1,10 @@
 $(document).ready( function(){
 
+    // Set page title
+    let subject = $('.sidebar .wrapper > a').text().trim();
+    let topic   = $('.main h1:first-child()').text().trim();
+    document.title = `${subject}${ (topic) ? ` - ${topic}` : '' }`;
+
     let active = $(`a[href="${location.pathname}"]`);
     if( active[0] ){
       // Show active page
@@ -11,8 +16,18 @@ $(document).ready( function(){
       $('.sidebar').scrollTop( active.offset().top );
     };
 
+    // Open links that are not pages in a new tab
+    $(`a[href]:not([href^="/${window.location.pathname.split('/')[1]}"])`).attr( 'target', '_blank' );
+
+    // Toggle dropdown items
     $('.dropdown a:not(:only-child)').click( function(){
       $(this).parent().children('.nav').stop().slideToggle();
+    });
+
+    // Toggle sidebar (mobile) - event: click link in nav or click drawer
+    $('.drawer, .sidebar .item:not(.dropdown) a').click( function(){
+      $('.sidebar').toggleClass('hide');
+      $('.drawer i').toggleClass('fas far');
     });
 
     // Page transitions

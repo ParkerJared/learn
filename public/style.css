@@ -8,189 +8,269 @@
 - extra
 */ 
 
-/* [ Scroll bar ] */
+/* - [ VARIABLES ] - */
 
-::-webkit-scrollbar {
-    width: 5px;
-}
-::-webkit-scrollbar-track {
-    background: none;
-}
-::-webkit-scrollbar-thumb {
-    background: lightgrey; 
+:root{
+  --colour: black;
 
-    width: 5px;
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: grey; 
-
-    border-radius: 5px;
+  --sidebar-size: 18em;
 }
 
-/* [ COLOURS ] */
-
-.item a.active  { color: var(--color); }
-.main .wrapper a{ color: var(--color); }
+@media (max-aspect-ratio: 7/8){
+  :root{
+    --sidebar-size: 0;
+  }
+}
 
 /* [ DEFAULTS ] */
 
 *{
-    font-family: montserrat;
+  font-family: montserrat;
 }
 
 a{
-    color: inherit;
-    text-decoration: inherit;
-}
-
-a:hover{
-    font-weight: bold;
+  color: inherit;
+  text-decoration: inherit;
 }
 
 li{
-    list-style: none;
-    text-decoration: none;
+  list-style: none;
+  text-decoration: none;
 }
 
-body, html{
-    height: 100%;
-    width: 100%;
+body,
+html{
+  height: 100%;
+  width: 100%;
 
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
-/* [ BASICS ] */
+/* - [ BASICS ] - */
+
+.wrapper{
+  padding: 1.5em;
+}
+.wrapper > :first-child{
+  margin-top: 0;
+}
+
+/* - [ GENERAL STYLING ] - */
+
+/* - COLOURS - */
+
+.item a.active  { color: var(--colour); }
+.main .wrapper a{ color: var(--colour); }
+
+/* - SCROLL BAR - */
+
+::-webkit-scrollbar{
+  width: 5px;
+}
+::-webkit-scrollbar-track{
+  background: none;
+}
+::-webkit-scrollbar-thumb{
+  background: lightgrey; 
+
+  border-radius: 5px;
+  width: 5px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background: grey; 
+
+  border-radius: 5px;
+}
+
+/* - LINKS - */
+
+a:hover{
+  font-weight: bold;
+}
+
+/* - LEARN HOME - */
 
 .box{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-    border-radius: 1em;
-    padding: 1em;
+  border-radius: 1em;
+  padding: 1em;
 
-    position: relative;
-    top: 0;
+  position: relative;
+  top: 0;
 
-    transition: top 0.3s;
+  transition: top .3s;
 }
 .box:hover{
     top: -5px;
 }
 
-.wrapper{
-    padding: 1.5em;
+/* [ SIDE BAR ] */
+
+.sidebar .wrapper{
+  padding-top: 0;
 }
-.wrapper > :first-child{
-    margin-top: 0;
+
+.sidebar{
+  background-color: white;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2), 0 0 20px 0px rgba(0, 0, 0, 0.19);
+
+  width: var(--sidebar-size);
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+
+  overflow: auto;
+
+  z-index: 1;
+  /* transition: cubic-bezier(.96, 1.61, .31, .74) .3s; */
+}
+
+/* - SUBJECT - */
+
+.sidebar h1{
+  background-color: white;
+  border-bottom: 1px solid lightgrey;
+
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin: 0;
+
+  text-align: center;
+
+  position: sticky;
+  top: 0;
+}
+
+/* - NAVIGATION - */
+
+.item a{
+  display: block;
+
+  border-bottom: 1px solid lightgrey;
+
+  padding: 0.75em;
+}
+.item a:hover{
+  cursor: pointer;
+}
+.item a.active{
+  font-weight: bold;
+}
+
+/* Dropdown items */
+.item .nav a{
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.dropdown a:only-child{
+  background-color: rgb(240, 240, 240);
+}
+
+/* Dropdown icon */
+.dropdown a:not(:only-child)::before {
+  color: lightgrey;
+
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight:900;
+
+  padding-right: 0.25em;
+}
+/* Master dropdown */
+.sidebar .wrapper > .nav > .item > a::before{
+  color: black;
+}
+
+/* Dropdown indents */
+.nav .dropdown .item a{
+  padding-left: 1em;
+}
+.nav .dropdown .dropdown .item a{
+  padding-left: 2em;
+}
+.nav .dropdown .dropdown .dropdown .item a{
+  padding-left: 3em;
+}
+
+/* Hide dropdowns */
+.dropdown .nav{
+  display: none;
+}
+
+/* - DRAWER (FOR MOBILE) - */
+
+.drawer {
+  display: none;
+
+  background-color: white;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2), 0 0 20px 0px rgba(0, 0, 0, 0.19);
+
+  border-radius: 0em 0em 1em 1em;
+  padding: 0.5em;
+
+  font-size: 1.5em;
+
+  position: fixed;
+  top: 0;
+  right: 1em;
+
+  z-index: 2;
+}
+.drawer:hover {
+  cursor: pointer;
 }
 
 /* [ MAIN CONTENT ]*/
 
 .main{
-    margin-left: 18em;
+  margin-left: var(--sidebar-size);
 
-    z-index: -1;
+  z-index: -1;
 }
+
+/* - BASIC CONTENT - */
 
 .main img {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2), 0 0 10px 0px rgba(0, 0, 0, 0.19); */
 
+  width: 100%;
+  max-width: 40em;
+}
+
+.main h1 {
+  font-weight: bold;
+  padding-bottom: 0.1em;
+  border-bottom: 2px solid var(--colour);
+}
+
+.main h2 {
+  padding-bottom: 0.2em;
+  border-bottom: 1px dashed var(--colour);
+}
+
+/* - [ MOBILE ] - */
+
+@media (max-aspect-ratio: 7/8) {
+
+  /* Make room for drawer */
+  .main{
+    margin-top: 2.5em;
+  }
+
+  .sidebar {
     width: 100%;
-}
 
-/* [ SIDEBAR ] */
+    transition: ease .3s;
+  }
 
-.sidebar .wrapper{
-    padding-top: 0;
-}
-
-.sidebar{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    height: 100%;
-    width: 18em;
-
-    overflow: auto;
-
-    position: fixed;
-    top: 0;
-
-    z-index: 1;
-}
-
-.sidebar h1{
-    border-bottom: 1px solid lightgrey;
-    background-color: white;
-
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    margin: 0;
-
-    text-align: center;
-
-    position: sticky;
-    top: 0;
-}
-
-/* - NAVIGATION - */
-
-/* Navigation items */
-.item a{
-    border-bottom: 1px solid lightgrey;
-
-    padding: 0.75em;
-
+  .drawer{
     display: block;
-}
-.item a:hover{
-    font-weight: bold;
+  }
+  .sidebar.hide {
+    transform: translate(-100%, 0);
+  }
 
-    cursor: pointer;
-}
-.item a.active{
-    font-weight: bold;
-}
-
-/* Hide dropdowns */
-.dropdown .nav{
-    display: none;
-}
-
-/* Dropdown indents */
-/* .nav .dropdown .item{
-    text-indent: 1em;
-}
-.nav .dropdown .dropdown .item{
-    text-indent: 2em;
-}
-.nav .dropdown .dropdown .dropdown .item{
-    text-indent: 3em;
-} */
-.nav .dropdown .item a{
-    padding-left: 1em;
-}
-.nav .dropdown .dropdown .item a{
-    padding-left: 2em;
-}
-.nav .dropdown .dropdown .dropdown .item a{
-    padding-left: 3em;
-}
-
-/* Style dropdown items */
-.item .nav a{
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-}
-.dropdown a:only-child{
-    background-color: rgb(240, 240, 240);
-}
-
-/* Dropdown icon */
-.dropdown .dropdown a:not(:only-child)::before {
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
-    font-weight:900;
-
-    padding-right: 0.25em;
 }
