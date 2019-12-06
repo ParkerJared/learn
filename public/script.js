@@ -12,8 +12,14 @@ $(document).ready( function(){
 
       // Dropdown to active page
       active.parents('.dropdown').children('.nav').slideToggle(0);
+
       // Scroll to active page
-      $('.sidebar').scrollTop( active.offset().top );
+      let top  = $(`a[href="${location.pathname}"]`).position().top - $('.sidebar .wrapper > .nav').position().top;
+      let view = $('.sidebar').outerHeight() - $('.sidebar h1').outerHeight();
+      console.log(top);
+      console.log(active.outerHeight())
+      console.log(top + active.outerHeight())
+      $('.sidebar').scrollTop( top - view + active.outerHeight()*1.5 );
     };
 
     // Open links that are not pages in a new tab
